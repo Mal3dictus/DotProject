@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DogsApp.Models.Breed;
+
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
 namespace DogsApp.Models.Dog
@@ -16,12 +18,12 @@ namespace DogsApp.Models.Dog
         [Display(Name = "Age")]
         public int Age { get; set; }
 
-        [Required]
-        [MaxLength(50)]
+
         [Display(Name = "Breed")]
-        public string Breed { get; set; } = null!;
+        public int BreedId { get; set; }
 
         [Display(Name = "Dog Picture")]
         public string? Picture { get; set; }
+        public virtual List<BreedPaiViewModel> Breeds { get; set; } = new List<BreedPaiViewModel>();
     }
 }
