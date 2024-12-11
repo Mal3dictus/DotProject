@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogsApp", "DogsWebApp\DogsApp.csproj", "{18215CCB-13ED-4715-8BC9-0D28B45E563F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogsApp", "DogsApp\DogsApp.csproj", "{18215CCB-13ED-4715-8BC9-0D28B45E563F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogsApp.Infrastructure", "..\DogsApp.Infrastructure\DogsApp.Infrastructure.csproj", "{117D7146-90C7-4B53-8408-D16FC23C03E5}"
 EndProject
