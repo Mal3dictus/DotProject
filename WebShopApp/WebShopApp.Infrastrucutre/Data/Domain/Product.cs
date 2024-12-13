@@ -26,6 +26,6 @@ namespace WebShopApp.Infrastrucutre.Data.Domain
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public virtual IEnumerable<Order> Orders { get; set; }=new List<Order>();
-        public virtual IEnumerable<Order> Order { get; set; } = new List<Order>();
+        
     }
 }

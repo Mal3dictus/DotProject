@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using WebShopApp.Data;
+using WebShopApp.Infrastrucutre.Data.Domain;
 
 namespace WebShopApp
 {
@@ -17,7 +18,7 @@ namespace WebShopApp
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
           
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => {
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => {
                 options.Password.RequiredLength = 5;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
