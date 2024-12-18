@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using WebShopApp.Core.Contracts;
+using WebShopApp.Core.Services;
 using WebShopApp.Data;
 using WebShopApp.Infrastrucutre.Data.Domain;
+using WebShopApp.Infrastrucutre.Infrastructure;
 
 namespace WebShopApp
 {
@@ -27,11 +29,14 @@ namespace WebShopApp
                 options.Password.RequireNonAlphanumeric = false;
 
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddTransient<ICategoryService, CategoryService>();
+            builder.Services.AddTransient<IBrandService, BrandService>();
             var app = builder.Build();
-
+            app.PrepareDatabase();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
