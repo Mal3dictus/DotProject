@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using WebShopApp.Infrastrucutre.Data.Domain;
+using WebShopApp.Infrastructure.Data.Domain;
 
 namespace WebShopApp.Core.Contracts
 {
@@ -12,6 +11,6 @@ namespace WebShopApp.Core.Contracts
     {
         List<Category> GetCategories();
         Category GetCategoryById(int categoryId);
-        List<Product> GetProductByCategory(int categoryId);
+        List<Product> GetProductsByCategory(int categoryId);
     }
 }

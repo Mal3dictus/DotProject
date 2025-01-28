@@ -3,19 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebShopApp.Data;
+using WebShopApp.Infrastructure.Data;
 
 #nullable disable
 
-namespace WebShopApp.Infrastrucutre.Migrations
+namespace WebShopApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241213093443_InitialMigrate")]
-    partial class InitialMigrate
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,7 +159,7 @@ namespace WebShopApp.Infrastrucutre.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.ApplicationUser", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -169,7 +167,7 @@ namespace WebShopApp.Infrastrucutre.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Adress")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -241,7 +239,7 @@ namespace WebShopApp.Infrastrucutre.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.Brand", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,7 +257,7 @@ namespace WebShopApp.Infrastrucutre.Migrations
                     b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.Category", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -277,7 +275,7 @@ namespace WebShopApp.Infrastrucutre.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.Order", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -294,31 +292,26 @@ namespace WebShopApp.Infrastrucutre.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProducctId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.Product", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -370,7 +363,7 @@ namespace WebShopApp.Infrastrucutre.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("WebShopApp.Infrastrucutre.Data.Domain.ApplicationUser", null)
+                    b.HasOne("WebShopApp.Infrastructure.Data.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -379,7 +372,7 @@ namespace WebShopApp.Infrastrucutre.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("WebShopApp.Infrastrucutre.Data.Domain.ApplicationUser", null)
+                    b.HasOne("WebShopApp.Infrastructure.Data.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -394,7 +387,7 @@ namespace WebShopApp.Infrastrucutre.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebShopApp.Infrastrucutre.Data.Domain.ApplicationUser", null)
+                    b.HasOne("WebShopApp.Infrastructure.Data.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -403,39 +396,41 @@ namespace WebShopApp.Infrastrucutre.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("WebShopApp.Infrastrucutre.Data.Domain.ApplicationUser", null)
+                    b.HasOne("WebShopApp.Infrastructure.Data.Domain.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.Order", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.Order", b =>
                 {
-                    b.HasOne("WebShopApp.Infrastrucutre.Data.Domain.Product", "Product")
+                    b.HasOne("WebShopApp.Infrastructure.Data.Domain.Product", "Product")
                         .WithMany("Orders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebShopApp.Infrastrucutre.Data.Domain.ApplicationUser", "User")
+                    b.HasOne("WebShopApp.Infrastructure.Data.Domain.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.Product", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.Product", b =>
                 {
-                    b.HasOne("WebShopApp.Infrastrucutre.Data.Domain.Brand", "Brand")
+                    b.HasOne("WebShopApp.Infrastructure.Data.Domain.Brand", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebShopApp.Infrastrucutre.Data.Domain.Category", "Category")
+                    b.HasOne("WebShopApp.Infrastructure.Data.Domain.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -446,17 +441,17 @@ namespace WebShopApp.Infrastrucutre.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.Brand", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.Brand", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.Category", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("WebShopApp.Infrastrucutre.Data.Domain.Product", b =>
+            modelBuilder.Entity("WebShopApp.Infrastructure.Data.Domain.Product", b =>
                 {
                     b.Navigation("Orders");
                 });
