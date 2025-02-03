@@ -2,6 +2,7 @@
 @{
 	ViewData["Title"] = "Create";
 }
+
 <h1>Order</h1>
 <hr />
 <div class="row">
@@ -50,24 +51,25 @@
 			<div class="form-group">
 				<input type="submit" value="Order" class="btn btn-primary" />
 
-				<a asp-action="Index" asp-controller="Product" class="btn btn-
-warning">Back to Products</a>
-
+				<a asp-action="Index" asp-controller="Product" class="btn btn-warning">Back to Products</a>
 			</div>
 		</form>
 	</div>
 </div>
+
 <script>
-	function calcSum() {
-	let q = document.getElementsByName('Quantity')[0].value;
-	let p = document.getElementsByName('Price')[0].value;
-	let d = document.getElementsByName('Discount')[0].value;
-	let sum = Number(q) * (Number(p) - Number(p) * Number(d) / 100);
-	document.getElementsByName('TotalPrice')[0].value = sum.toFixed(2)
+	function calcSum() 
+	{
+		let q = document.getElementsByName('Quantity')[0].value;
+		let p = document.getElementsByName('Price')[0].value;
+		let d = document.getElementsByName('Discount')[0].value;
+		let sum = (Number(q) * (Number(p) - ((Number(p) * Number(d)) / 100)));
+		document.getElementsByName('TotalPrice')[0].value = sum.toFixed(2)
 	}
 	document.getElementById('Quantity').max = @Model.QuantityInStock;
 	document.getElementById('Quantity').min = 1;
 </script>
+
 @section Scripts {
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");

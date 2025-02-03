@@ -19,19 +19,24 @@ namespace WebShopApp.Core.Services
             _context = context;
             _productService = productService;
         }
-        public bool Create(int productId, string userID, int quantity)
+        public bool Create(int productId, string userId, int quantity)
         {
             var product = this._context.Products.SingleOrDefault(x => x.Id == productId);
-            if (product == null) { return false; }
+            if (product == null) 
+            {
+                return false; 
+            }
+
             Order item = new Order
             {
                 OrderDate = DateTime.Now,
                 ProductId = productId,
-                UserId = userID,
+                UserId = userId,
                 Quantity = quantity,
                 Price = product.Price,
                 Discount = product.Discount
             };
+
             product.Quantity -= quantity;
             
             this._context.Products.Update(product);

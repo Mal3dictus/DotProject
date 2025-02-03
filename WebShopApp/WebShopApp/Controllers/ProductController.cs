@@ -76,7 +76,7 @@ namespace WebShopApp.Controllers
             }).ToList();
             return this.View(products);
         }
-
+        
         // GET: ProductController/Edit/5
         public ActionResult Edit(int id)
         {

@@ -50,21 +50,28 @@ namespace WebShopApp.Controllers
             string currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var product = this._productService.GetProductById(bindingModel.ProductId);
-            if (currentUserId == null || product == null || product.Quantity < bindingModel.Quantity || product.Quantity == 0){ return RedirectToAction("Denied", "Order");}
+            if (currentUserId == null || product == null || product.Quantity < bindingModel.Quantity || product.Quantity == 0)
+            { 
+                return RedirectToAction("Denied", "Order");
+            }
 
-            if (ModelState.IsValid){ _orderService.Create(bindingModel.ProductId, currentUserId, bindingModel.Quantity); }
+            if (ModelState.IsValid)
+            { 
+                _orderService.Create(bindingModel.ProductId, currentUserId, bindingModel.Quantity); 
+            }
 
             return this.RedirectToAction("Index", "Product");
         }
 
         // GET: OrderController/Denied
-        public ActionResult Denied() {return View();}
+        public ActionResult Denied() 
+        {
+            return View();
+        }
 
         [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
-          
-
             List<OrderIndexVM> orders = _orderService.GetOrders()
                 .Select(x => new OrderIndexVM
                 {
